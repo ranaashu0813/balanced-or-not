@@ -1,0 +1,32 @@
+class Solution{
+    public:
+    //Function to check whether a binary tree is balanced or not.
+       pair<bool,int> isBalancedFast(Node* root){
+    if(root==NULL){
+            return {true,0};
+        }
+        
+        pair<bool,int>left=isBalancedFast(root->left);
+        pair<bool,int>right=isBalancedFast(root->right);
+        
+        bool leftAns=left.first;
+        bool rightAns=right.first;
+        
+        bool diff=abs(left.second-right.second)<=1;
+        
+        pair<bool,int>ans;
+        ans.first=(leftAns && rightAns && diff);
+        ans.second=1+max(left.second,right.second);
+        
+        return ans;
+        
+        
+        
+    }
+    bool isBalanced(Node *root)
+    {
+        return isBalancedFast(root).first;
+        
+        
+    }
+};
